@@ -27,6 +27,9 @@ crontrace parse "*/5 * * * *"
 # Load and visualize schedules from a file
 crontrace analyze --file schedules.txt
 
+# Predict the next N run times (default: 5)
+crontrace parse "0 9 * * 1-5" --next 10
+
 # Detect conflicts across multiple expressions
 crontrace conflicts "0 * * * *" "*/30 * * * *" "0 0 * * *"
 ```
@@ -52,6 +55,24 @@ Next runs  :
 - Predict the next N scheduled run times
 - Detect scheduling conflicts between multiple jobs
 - Human-readable schedule descriptions
+- Load expressions from a file for batch analysis
+
+---
+
+## File Format
+
+When using `--file`, provide one cron expression per line. Lines starting with `#` are treated as comments:
+
+```
+# Daily backup
+0 2 * * *
+
+# Hourly health check
+0 * * * *
+
+# Every 15 minutes during business hours
+*/15 9-17 * * 1-5
+```
 
 ---
 
