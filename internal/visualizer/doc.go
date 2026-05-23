@@ -21,4 +21,8 @@
 //
 // The package writes to any io.Writer, making it straightforward to capture
 // output in tests or redirect it to a file.
+//
+// RenderConflictTable highlights pairs of schedules whose upcoming run times
+// overlap within a configurable window, helping users identify jobs that may
+// contend for shared resources or produce race conditions.
 package visualizer
