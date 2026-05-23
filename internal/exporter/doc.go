@@ -1,18 +1,14 @@
-// Package exporter provides serialization utilities for crontrace schedule data.
+// Package exporter provides utilities for serializing cron schedule data
+// into multiple output formats.
 //
-// It supports exporting parsed cron schedules, next-run predictions, and
-// detected conflicts into structured formats suitable for programmatic
-// consumption or integration with external tooling.
+// Supported formats:
 //
-// # JSON Export
+//   - JSON  — structured payload via ToJSON / NewPayload
+//   - CSV   — tabular export via ToCSV
+//   - iCal  — RFC 5545 calendar format via ToICAL
 //
-// The primary export format is JSON. Use [NewPayload] to construct an
-// [ExportPayload] from schedule and conflict data, then call [ToJSON] to
-// serialize it:
-//
-//	payload := exporter.NewPayload(schedules, conflicts)
-//	data, err := exporter.ToJSON(payload)
-//
-// The resulting JSON includes a top-level generated_at timestamp (UTC),
-// a schedules array, and a conflicts array.
+// Each exporter accepts a slice of scheduler.ScheduledRun values and optional
+// conflict data produced by the scheduler package, enabling downstream tools
+// such as calendar applications, dashboards, and data pipelines to consume
+// cron schedule information without depending on crontrace internals.
 package exporter
